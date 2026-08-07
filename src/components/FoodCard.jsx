@@ -12,7 +12,7 @@ function FoodCard({ food }) {
             <div className="bg-white rounded-xl shadow overflow-hidden">
 
                 <img
-                    src={`http://localhost:8080/uploads/${food.imageUrl}`}
+                    src={`http://3.110.136.211:8080/uploads/${food.imageUrl}`}
                     alt={food.name}
                     className="w-full h-56 object-cover"
                 />

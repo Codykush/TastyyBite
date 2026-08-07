@@ -42,7 +42,7 @@ function AdminAddFood() {
         formData.append("file", image);
 
         const response = await axios.post(
-            "http://localhost:8080/images/upload",
+            "http://3.110.136.211:8080/images/upload",
             formData,
             {
                 headers: {

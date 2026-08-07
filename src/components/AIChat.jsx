@@ -75,7 +75,7 @@ function AIChat({ onClose }) {
 
 
             const response = await fetch(
-                "http://localhost:8080/api/chat",
+                "http://3.110.136.211:8080/api/chat",
                 {
 
                     method: "POST",

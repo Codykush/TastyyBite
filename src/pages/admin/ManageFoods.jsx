@@ -166,7 +166,7 @@ function ManageFoods() {
 
                                     <img
                                     src={
-                                    "http://localhost:8080/images/"
+                                    "http://3.110.136.211:8080/images/"
                                     +food.imageUrl
                                     }
                                     width="80"
