@@ -1,0 +1,41 @@
+@import "tailwindcss";
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#f8fafc;
+}
+
+button{
+    cursor:pointer;
+}
+
+button:hover{
+    transform:translateY(-2px);
+}
+
+button:active{
+    transform:scale(.97);
+}
+
+img{
+    transition:.3s;
+}
+
+img:hover{
+    transform:scale(1.04);
+}
+
+a{
+    transition:.3s;
+}
+
+.card{
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 40px rgba(0,0,0,.15);
+}
