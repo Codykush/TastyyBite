@@ -1,14 +1,14 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: import.meta.env.DEV
-        ? "http://localhost:8080"
-        : "",
+    baseURL: "http://3.110.136.211:8080",
+    headers: {
+        "Content-Type": "application/json",
+    },
 });
 
 api.interceptors.request.use(
     (config) => {
-
         const token = localStorage.getItem("token");
 
         if (token) {
@@ -17,9 +17,7 @@ api.interceptors.request.use(
 
         return config;
     },
-    (error) => {
-        return Promise.reject(error);
-    }
+    (error) => Promise.reject(error)
 );
 
 export default api;

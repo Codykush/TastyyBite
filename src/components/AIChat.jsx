@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import ChatMessage from "./ChatMessage";
 import api from "../services/api";
 
@@ -8,55 +8,54 @@ function AIChat({ onClose }) {
         {
             sender: "ai",
             text:
-                "👋 Hi! I'm Bite, your AI Food Partner.\n\nAsk me about pizzas, burgers, offers, restaurants or meals."
-        }
+                "👋 Hi! I'm Bite, your AI Food Partner.\n\nAsk me about pizzas, burgers, offers, restaurants or meals.",
+        },
     ]);
 
     const [input, setInput] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const chatEndRef = useRef(null);
 
     useEffect(() => {
-
         chatEndRef.current?.scrollIntoView({
-            behavior: "smooth"
+            behavior: "smooth",
         });
-
     }, [messages]);
 
     const sendMessage = async () => {
 
-        if (!input.trim()) {
+        if (!input.trim() || loading) {
             return;
         }
 
-        const messageText = input.trim();
+        const message = input.trim();
 
         setMessages((prev) => [
             ...prev,
             {
                 sender: "user",
-                text: messageText
-            }
+                text: message,
+            },
         ]);
 
         setInput("");
+        setLoading(true);
 
         try {
 
-            const response = await api.post(
-                "/api/chat",
-                {
-                    message: messageText
-                }
-            );
+            const response = await api.post("/api/chat", {
+                message: message,
+            });
 
             setMessages((prev) => [
                 ...prev,
                 {
                     sender: "ai",
-                    text: response.data.response
-                }
+                    text:
+                        response.data?.response ||
+                        "Sorry, I couldn't understand that.",
+                },
             ]);
 
         } catch (error) {
@@ -67,21 +66,21 @@ function AIChat({ onClose }) {
                 ...prev,
                 {
                     sender: "ai",
-                    text:
-                        "❌ Sorry, Bite is unavailable right now."
-                }
+                    text: "❌ Sorry, Bite is unavailable right now.",
+                },
             ]);
+
+        } finally {
+            setLoading(false);
         }
     };
 
     return (
-
         <div className="fixed bottom-28 right-8 bg-white rounded-3xl shadow-2xl w-[400px] h-[600px] flex flex-col overflow-hidden z-50">
 
             <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white p-5 flex justify-between">
 
                 <div>
-
                     <h2 className="font-bold text-xl">
                         🤖 Bite
                     </h2>
@@ -89,7 +88,6 @@ function AIChat({ onClose }) {
                     <p className="text-sm">
                         Your AI Food Partner
                     </p>
-
                 </div>
 
                 <button
@@ -104,14 +102,19 @@ function AIChat({ onClose }) {
             <div className="flex-1 overflow-y-auto p-4 bg-gray-100">
 
                 {messages.map((msg, index) => (
-
                     <ChatMessage
                         key={index}
                         sender={msg.sender}
                         text={msg.text}
                     />
-
                 ))}
+
+                {loading && (
+                    <ChatMessage
+                        sender="ai"
+                        text="Thinking... 🤔"
+                    />
+                )}
 
                 <div ref={chatEndRef}></div>
 
@@ -121,25 +124,23 @@ function AIChat({ onClose }) {
 
                 <input
                     value={input}
-                    onChange={(e) =>
-                        setInput(e.target.value)
-                    }
+                    onChange={(e) => setInput(e.target.value)}
                     onKeyDown={(e) => {
-
                         if (e.key === "Enter") {
                             sendMessage();
                         }
-
                     }}
                     className="flex-1 border rounded-xl px-4 py-3"
                     placeholder="Ask Bite..."
+                    disabled={loading}
                 />
 
                 <button
                     onClick={sendMessage}
-                    className="bg-red-500 hover:bg-red-600 text-white px-5 rounded-xl"
+                    disabled={loading}
+                    className="bg-red-500 hover:bg-red-600 disabled:bg-gray-400 text-white px-5 rounded-xl"
                 >
-                    Send
+                    {loading ? "..." : "Send"}
                 </button>
 
             </div>

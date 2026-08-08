@@ -1,6 +1,8 @@
 import { useState } from "react";
-import api from "../services/api";
+import axios from "axios";
 import { addFood } from "../services/AdminService";
+
+const BACKEND_URL = "http://3.110.136.211:8080";
 
 function AdminAddFood() {
 
@@ -18,8 +20,8 @@ function AdminAddFood() {
         available: true,
         imageUrl: "",
         restaurant: {
-            id: 1
-        }
+            id: 1,
+        },
     });
 
     const [image, setImage] = useState(null);
@@ -30,7 +32,7 @@ function AdminAddFood() {
 
         setFood((prev) => ({
             ...prev,
-            [name]: value
+            [name]: value,
         }));
     };
 
@@ -44,14 +46,9 @@ function AdminAddFood() {
 
         formData.append("file", image);
 
-        const response = await api.post(
-            "/images/upload",
-            formData,
-            {
-                headers: {
-                    "Content-Type": "multipart/form-data"
-                }
-            }
+        const response = await axios.post(
+            `${BACKEND_URL}/images/upload`,
+            formData
         );
 
         return response.data.imageUrl;
@@ -71,16 +68,36 @@ function AdminAddFood() {
 
             const finalFood = {
                 ...food,
-                imageUrl: imageUrl
+                imageUrl,
             };
 
             await addFood(finalFood);
 
             alert("Food Added Successfully");
 
+            setFood({
+                name: "",
+                price: "",
+                originalPrice: "",
+                description: "",
+                category: "",
+                veg: true,
+                offerPercentage: "",
+                deliveryTime: "",
+                platform: "",
+                orderUrl: "",
+                available: true,
+                imageUrl: "",
+                restaurant: {
+                    id: 1,
+                },
+            });
+
+            setImage(null);
+
         } catch (error) {
 
-            console.error("Add Food Error:", error);
+            console.error("Error Adding Food:", error);
 
             alert("Error Adding Food");
         }
@@ -101,8 +118,7 @@ function AdminAddFood() {
                     onChange={handleChange}
                 />
 
-                <br />
-                <br />
+                <br /><br />
 
                 <input
                     name="price"
@@ -111,8 +127,7 @@ function AdminAddFood() {
                     onChange={handleChange}
                 />
 
-                <br />
-                <br />
+                <br /><br />
 
                 <input
                     name="originalPrice"
@@ -121,8 +136,7 @@ function AdminAddFood() {
                     onChange={handleChange}
                 />
 
-                <br />
-                <br />
+                <br /><br />
 
                 <input
                     name="description"
@@ -131,8 +145,7 @@ function AdminAddFood() {
                     onChange={handleChange}
                 />
 
-                <br />
-                <br />
+                <br /><br />
 
                 <input
                     name="category"
@@ -141,8 +154,7 @@ function AdminAddFood() {
                     onChange={handleChange}
                 />
 
-                <br />
-                <br />
+                <br /><br />
 
                 <input
                     name="offerPercentage"
@@ -151,8 +163,7 @@ function AdminAddFood() {
                     onChange={handleChange}
                 />
 
-                <br />
-                <br />
+                <br /><br />
 
                 <input
                     name="deliveryTime"
@@ -161,8 +172,7 @@ function AdminAddFood() {
                     onChange={handleChange}
                 />
 
-                <br />
-                <br />
+                <br /><br />
 
                 <input
                     name="platform"
@@ -171,8 +181,7 @@ function AdminAddFood() {
                     onChange={handleChange}
                 />
 
-                <br />
-                <br />
+                <br /><br />
 
                 <input
                     name="orderUrl"
@@ -181,8 +190,7 @@ function AdminAddFood() {
                     onChange={handleChange}
                 />
 
-                <br />
-                <br />
+                <br /><br />
 
                 <label>
 
@@ -194,26 +202,24 @@ function AdminAddFood() {
                         onChange={(e) =>
                             setFood((prev) => ({
                                 ...prev,
-                                veg: e.target.checked
+                                veg: e.target.checked,
                             }))
                         }
                     />
 
                 </label>
 
-                <br />
-                <br />
+                <br /><br />
 
                 <input
                     type="file"
                     accept="image/*"
                     onChange={(e) =>
-                        setImage(e.target.files[0])
+                        setImage(e.target.files?.[0] || null)
                     }
                 />
 
-                <br />
-                <br />
+                <br /><br />
 
                 <button type="submit">
                     Add Food

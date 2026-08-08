@@ -1,78 +1,98 @@
 import api from "./api";
 
-// Get all foods
+// ==============================
+// GET ALL FOODS
+// ==============================
+
 export const getAllFoods = () => {
     return api.get("/foods");
 };
 
-// Filter foods
-export const filterFoods = (filterData) => {
-    return api.post("/api/foods/filter", filterData);
-};
+// ==============================
+// GET FOOD BY ID
+// ==============================
 
-// Get food by ID
 export const getFoodById = (id) => {
     return api.get(`/foods/${id}`);
 };
 
-// Search food
+// ==============================
+// DELETE FOOD
+// ==============================
+
+export const deleteFood = (id) => {
+    return api.delete(`/foods/${id}`);
+};
+
+// ==============================
+// SEARCH FOOD
+// ==============================
+
 export const searchFood = (keyword) => {
     return api.get("/foods/search", {
         params: {
-            keyword: keyword
-        }
+            keyword,
+        },
     });
 };
 
-// Get foods by category
+// ==============================
+// CATEGORY
+// ==============================
+
 export const getFoodsByCategory = (category) => {
     return api.get(`/foods/category/${category}`);
 };
 
-// Get veg foods
+// ==============================
+// VEG FOOD
+// ==============================
+
 export const getVegFoods = () => {
     return api.get("/foods/veg");
 };
 
-// Get non-veg foods
+// ==============================
+// NON-VEG FOOD
+// ==============================
+
 export const getNonVegFoods = () => {
     return api.get("/foods/nonveg");
 };
 
-// Get foods by restaurant
-export const getFoodsByRestaurant = (restaurantId) => {
-    return api.get(`/foods/restaurant/${restaurantId}`);
-};
+// ==============================
+// OFFERS
+// ==============================
 
-// Get foods by offer
 export const getFoodsByOffer = (minOffer) => {
     return api.get("/foods/offers", {
         params: {
-            minOffer: minOffer
-        }
+            minOffer,
+        },
     });
 };
 
-// Get foods by delivery time
+// ==============================
+// DELIVERY TIME
+// ==============================
+
 export const getFoodsByDeliveryTime = (maxTime) => {
     return api.get("/foods/delivery", {
         params: {
-            maxTime: maxTime
-        }
+            maxTime,
+        },
     });
 };
 
-// Get foods by budget
+// ==============================
+// BUDGET
+// ==============================
+
 export const getFoodsByBudget = (min, max) => {
     return api.get("/foods/budget", {
         params: {
-            min: min,
-            max: max
-        }
+            min,
+            max,
+        },
     });
-};
-
-// Delete food
-export const deleteFood = (id) => {
-    return api.delete(`/foods/${id}`);
 };

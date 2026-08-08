@@ -3,19 +3,22 @@ import ComparePrices from "./ComparePrices";
 import ProtectedButton from "./ProtectedButton";
 
 function FoodCard({ food }) {
-
     const [open, setOpen] = useState(false);
+
+    const imageUrl = food.imageUrl
+        ? `http://3.110.136.211:8080/images/${food.imageUrl}`
+        : "/placeholder-food.jpg";
 
     return (
         <>
             <div className="bg-white rounded-xl shadow overflow-hidden">
 
                 <img
-                    src={`/uploads/${food.imageUrl}`}
+                    src={imageUrl}
                     alt={food.name}
                     className="w-full h-56 object-cover"
                     onError={(e) => {
-                        e.currentTarget.style.display = "none";
+                        e.currentTarget.src = "/placeholder-food.jpg";
                     }}
                 />
 
@@ -36,7 +39,7 @@ function FoodCard({ food }) {
                         </span>
 
                         <span>
-                            ⭐ {food.rating || 4.5}
+                            ⭐4.5
                         </span>
 
                     </div>
@@ -50,12 +53,7 @@ function FoodCard({ food }) {
                         </ProtectedButton>
 
                         <ProtectedButton
-                            onClick={() =>
-                                window.open(
-                                    food.orderUrl,
-                                    "_blank"
-                                )
-                            }
+                            onClick={() => window.open(food.orderUrl, "_blank")}
                         >
                             Order
                         </ProtectedButton>
@@ -63,7 +61,6 @@ function FoodCard({ food }) {
                     </div>
 
                 </div>
-
             </div>
 
             {open && (

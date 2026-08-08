@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import {
-    getAllFoods,
-    deleteFood
-} from "../../services/FoodService";
-
+import { getAllFoods, deleteFood } from "../../services/FoodService";
 import { Link } from "react-router-dom";
+
+const BACKEND_URL = "http://3.110.136.211:8080";
 
 function ManageFoods() {
 
@@ -24,19 +22,15 @@ function ManageFoods() {
 
         } catch (error) {
 
-            console.error(
-                "Load Foods Error:",
-                error
-            );
+            console.error("Failed to load foods:", error);
         }
     };
 
     const handleDelete = async (id) => {
 
-        const confirmDelete =
-            window.confirm(
-                "Are you sure you want to delete this food?"
-            );
+        const confirmDelete = window.confirm(
+            "Are you sure you want to delete this food?"
+        );
 
         if (!confirmDelete) {
             return;
@@ -52,10 +46,7 @@ function ManageFoods() {
 
         } catch (error) {
 
-            console.error(
-                "Delete Food Error:",
-                error
-            );
+            console.error("Delete failed:", error);
 
             alert("Delete Failed");
         }
@@ -81,14 +72,12 @@ function ManageFoods() {
                 <thead>
 
                     <tr>
-
                         <th>Image</th>
                         <th>Name</th>
                         <th>Price</th>
                         <th>Category</th>
                         <th>Offer</th>
                         <th>Action</th>
-
                     </tr>
 
                 </thead>
@@ -104,12 +93,12 @@ function ManageFoods() {
                                 {food.imageUrl && (
 
                                     <img
-                                        src={`/images/${food.imageUrl}`}
+                                        src={`${BACKEND_URL}/images/${food.imageUrl}`}
                                         width="80"
                                         height="80"
                                         alt={food.name}
                                         style={{
-                                            objectFit: "cover"
+                                            objectFit: "cover",
                                         }}
                                     />
 
