@@ -1,6 +1,16 @@
 import api from "./api";
 
-export const addFood = async (food) => {
-    const response = await api.post("/foods", food);
-    return response.data;
+// Add food
+export const addFood = (food) => {
+    return api.post("/foods", food);
+};
+
+// Update food
+export const updateFood = (id, food) => {
+    return api.put(`/foods/${id}`, food);
+};
+
+// Delete food
+export const deleteAdminFood = (id) => {
+    return api.delete(`/foods/${id}`);
 };

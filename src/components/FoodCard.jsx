@@ -7,14 +7,16 @@ function FoodCard({ food }) {
     const [open, setOpen] = useState(false);
 
     return (
-
         <>
             <div className="bg-white rounded-xl shadow overflow-hidden">
 
                 <img
-                    src={`http://3.110.136.211:8080/uploads/${food.imageUrl}`}
+                    src={`/uploads/${food.imageUrl}`}
                     alt={food.name}
                     className="w-full h-56 object-cover"
+                    onError={(e) => {
+                        e.currentTarget.style.display = "none";
+                    }}
                 />
 
                 <div className="p-5">
@@ -34,7 +36,7 @@ function FoodCard({ food }) {
                         </span>
 
                         <span>
-                            ⭐4.5
+                            ⭐ {food.rating || 4.5}
                         </span>
 
                     </div>
@@ -49,7 +51,10 @@ function FoodCard({ food }) {
 
                         <ProtectedButton
                             onClick={() =>
-                                window.open(food.orderUrl)
+                                window.open(
+                                    food.orderUrl,
+                                    "_blank"
+                                )
                             }
                         >
                             Order
@@ -61,19 +66,14 @@ function FoodCard({ food }) {
 
             </div>
 
-            {open &&
-
+            {open && (
                 <ComparePrices
                     food={food}
                     onClose={() => setOpen(false)}
                 />
-
-            }
-
+            )}
         </>
-
     );
-
 }
 
 export default FoodCard;

@@ -1,0 +1,24 @@
+{
+    "rewrites": [
+        {
+            "source": "/api/:path*",
+            "destination": "http://3.110.136.211:8080/api/:path*"
+        },
+        {
+            "source": "/foods/:path*",
+            "destination": "http://3.110.136.211:8080/foods/:path*"
+        },
+        {
+            "source": "/platforms/:path*",
+            "destination": "http://3.110.136.211:8080/platforms/:path*"
+        },
+        {
+            "source": "/uploads/:path*",
+            "destination": "http://3.110.136.211:8080/uploads/:path*"
+        },
+        {
+            "source": "/images/:path*",
+            "destination": "http://3.110.136.211:8080/images/:path*"
+        }
+    ]
+}
