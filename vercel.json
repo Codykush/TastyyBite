@@ -14,6 +14,10 @@
       "destination": "http://15.252.99.169:8080/foods/:path*"
     },
     {
+      "source": "/platforms",
+      "destination": "http://15.252.99.169:8080/platforms"
+    },
+    {
       "source": "/platforms/:path*",
       "destination": "http://15.252.99.169:8080/platforms/:path*"
     },
