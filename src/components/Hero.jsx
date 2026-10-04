@@ -1,21 +1,13 @@
-function Hero() {
-  return (
-    <section className="bg-gradient-to-r from-red-500 via-orange-500 to-yellow-400 text-white">
-
-      <div className="max-w-7xl mx-auto py-28 text-center">
-
-        <h1 className="text-6xl font-bold mb-6">
-          Discover the Best Food Deals 🍕
-        </h1>
-
-        <p className="text-xl mb-10">
-          Compare Swiggy, Zomato, Domino's, Pizza Hut and more in one place.
-        </p>
-
-      </div>
-
-    </section>
-  );
+function Hero(){
+    return(
+        <section className="relative overflow-hidden border-b border-[#211e1b]">
+            <div className="absolute left-[-180px] top-[-180px] h-[500px] w-[500px] rounded-full bg-[#ff6b2b]/10 blur-[120px]"/>
+            <div className="absolute right-[-180px] top-20 h-[450px] w-[450px] rounded-full bg-[#ff6b2b]/10 blur-[120px]"/>
+            <div className="tb-container relative grid min-h-[500px] items-center gap-12 py-20 lg:grid-cols-[1.15fr_.85fr]">
+                <div><div className="tb-label">Smart food discovery</div><h1 className="mt-5 max-w-3xl font-['Playfair_Display'] text-5xl font-black leading-[.98] tracking-[-.04em] text-[#fff8ef] sm:text-6xl lg:text-7xl">Discover your <span className="text-[#ff6b2b]">perfect bite.</span></h1><p className="mt-7 max-w-2xl text-lg font-medium leading-8 text-[#a99e94]">Compare food prices, offers and delivery times across platforms before you order. Eat better. Spend smarter.</p><div className="mt-8 flex flex-wrap gap-3"><span className="rounded-full border border-[#3d332c] bg-[#171513] px-4 py-2 text-sm font-bold text-[#d8cdc3]">⚖ Price comparison</span><span className="rounded-full border border-[#3d332c] bg-[#171513] px-4 py-2 text-sm font-bold text-[#d8cdc3]">⚡ Faster delivery</span><span className="rounded-full border border-[#3d332c] bg-[#171513] px-4 py-2 text-sm font-bold text-[#d8cdc3]">💰 Better deals</span></div></div>
+                <div className="relative mx-auto w-full max-w-md"><div className="absolute inset-8 rounded-full bg-[#ff6b2b]/15 blur-[80px]"/><div className="relative rounded-[34px] border border-[#3c3028] bg-gradient-to-br from-[#211811] to-[#0e0d0c] p-7 shadow-[0_30px_90px_rgba(0,0,0,.55)]"><div className="flex items-center justify-between"><span className="text-4xl">🍕</span><span className="rounded-full bg-[#173722] px-3 py-1 text-xs font-black text-[#72e09b]">BEST VALUE</span></div><p className="mt-8 text-xs font-black uppercase tracking-[.2em] text-[#ff7135]">TastyBite pick</p><h2 className="mt-2 font-['Playfair_Display'] text-3xl font-black text-[#fff8ef]">One place. Every deal.</h2><div className="mt-7 space-y-3"><div className="flex items-center justify-between rounded-2xl bg-[#171513] p-4"><span className="font-bold text-[#d6cbc1]">Lowest price</span><b className="text-[#72e09b]">✓ Found</b></div><div className="flex items-center justify-between rounded-2xl bg-[#171513] p-4"><span className="font-bold text-[#d6cbc1]">Fastest option</span><b className="text-[#ff9d6d]">⚡ Ready</b></div><div className="flex items-center justify-between rounded-2xl bg-[#171513] p-4"><span className="font-bold text-[#d6cbc1]">Bite AI</span><b className="text-[#fff8ef]">🤖 Online</b></div></div></div></div>
+            </div>
+        </section>
+    );
 }
-
 export default Hero;
